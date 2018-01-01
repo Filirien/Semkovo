@@ -8,7 +8,9 @@ namespace Semkovo.Data
     {
         public SemkovoDbContext(DbContextOptions<SemkovoDbContext> options)
             : base(options)
-        {}
+        {
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -23,6 +25,8 @@ namespace Semkovo.Data
             builder.ApplyConfiguration(new CommentConfig());
             builder.ApplyConfiguration(new ArticleVoteConfig());
             builder.ApplyConfiguration(new PictureConfig());
+
+            base.OnModelCreating(builder);
         }
     }
 }

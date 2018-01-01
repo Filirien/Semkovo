@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 
 namespace Semkovo.Data.Models
-{
-    
+{    
+    // This class will be deleted
     public class User
     {
-        public User() { }
+        public User()
+        {
+        }
+
         public User(string username, string email, string password)
         {
             this.Username = username;
@@ -14,7 +17,7 @@ namespace Semkovo.Data.Models
             this.Password = password;
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
@@ -26,9 +29,9 @@ namespace Semkovo.Data.Models
         public Picture ProfilePicture { get; set; }
         public bool? IsDeleted { get; set; }
         //  public DateTime? RegisteredOn { get; set; }
-        public ICollection<Article> Articles { get; set; } = new List<Article>();
-        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-        public ICollection<ArticleVote> UserVotes { get; set; }
+        public List<Article> Articles { get; set; } = new List<Article>();
+        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<ArticleVote> UserVotes { get; set; } = new List<ArticleVote>();
 
         //public override string ToString()
         //{
