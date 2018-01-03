@@ -1,17 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Semkovo.Data.EntityConfig;
 using Semkovo.Data.Models;
 
 namespace Semkovo.Data
 {
-    public class SemkovoDbContext : DbContext
+    public class SemkovoDbContext : IdentityDbContext<User>
     {
         public SemkovoDbContext(DbContextOptions<SemkovoDbContext> options)
             : base(options)
         {
         }
-
-        public DbSet<User> Users { get; set; }
+        
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Picture> Pictures { get; set; }

@@ -8,6 +8,8 @@ using Semkovo.Api.Infrastructure.Extensions;
 using AutoMapper;
 using Semkovo.Data;
 using Microsoft.EntityFrameworkCore;
+using Semkovo.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Semkovo.Api
 {
@@ -26,12 +28,22 @@ namespace Semkovo.Api
             services.AddDbContext<SemkovoDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddAuthentication(sharedOptions =>
+            //services.AddAuthentication(sharedOptions =>
+            //{
+            //    sharedOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //.AddAzureAdB2CBearer(options => Configuration.Bind("AzureAdB2C", options));
+
+            services.AddIdentity<User, IdentityRole>(options =>
             {
-                sharedOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
             })
-            .AddAzureAdB2CBearer(options => Configuration.Bind("AzureAdB2C", options));
-            
+            .AddEntityFrameworkStores<SemkovoDbContext>()
+            .AddDefaultTokenProviders();
+
             services.AddAutoMapper();
 
             services.AddDomainServices();
