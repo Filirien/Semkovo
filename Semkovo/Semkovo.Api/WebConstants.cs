@@ -8,5 +8,7 @@
         public const string TempDataErrorMessageKey = "ErrorMessage";
 
         public const string WithId = "{id}";
+
+        public const string EventArea = "Events";
     }
 }

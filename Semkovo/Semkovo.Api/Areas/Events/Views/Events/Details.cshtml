@@ -1,0 +1,35 @@
+﻿@model EventDetailsServiceModel
+
+@{
+    ViewData["Title"] = $"Event {Model.Name} details";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+<div class="row margin-top">
+    <div class="col-md-8 col-sm-8">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Creator Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Participants</th>
+                    <th>Maximum number of participants</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Name</td>
+                    <td>@Model.CreatorName</td>
+                    <td>@Model.StartDate.ToShortDateString()</td>
+                    <td>@Model.EndDate.ToShortDateString()</td>
+                    <td>@Model.Participants</td>
+                    <td>@Model.Limit</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
