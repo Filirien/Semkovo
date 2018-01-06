@@ -8,6 +8,7 @@ using System.Linq;
 using static Semkovo.Services.ServiceConstants;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Semkovo.Data.Models;
 
 namespace Semkovo.Services.Implementations
 {
@@ -28,5 +29,41 @@ namespace Semkovo.Services.Implementations
                 .Take(MemesPageSize)
                 .ProjectTo<ArticleListingServiceModel>()
                 .ToListAsync();
+
+        public async Task CreateArticle(string authorId, string title, string content)
+        {
+            Article article = new Article
+            {
+                Title = title,
+                Content = content,
+                AuthorId = authorId,
+                CreatedOn = DateTime.Now
+            };
+
+            this.db.Add(article);
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var article = this.db.Articles.Find(id);
+
+            if (article == null)
+            {
+                return false;
+            }
+
+            var articleComments = this.db.Comments.Where(c => c.ArticleId == id);
+
+            foreach (var comment in articleComments)
+            {
+                comment.ArticleId = null;
+            }
+
+            this.db.Remove(article);
+            await this.db.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace Semkovo.Data.Migrations
 {
     [DbContext(typeof(SemkovoDbContext))]
-    partial class SemkovoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180106175501_CommentAuthorIdSetToNotRequired")]
+    partial class CommentAuthorIdSetToNotRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
