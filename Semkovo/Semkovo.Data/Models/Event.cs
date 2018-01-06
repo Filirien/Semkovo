@@ -15,6 +15,8 @@ namespace Semkovo.Data.Models
 
         public User Creator { get; set; }
 
+        public string CreatorId { get; set; }
+
         public List<UserEvents> Participants { get; set; } = new List<UserEvents>();
 
         public int Limit { get; set; }

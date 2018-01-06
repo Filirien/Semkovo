@@ -14,14 +14,10 @@ namespace Semkovo.Data.EntityConfig
             builder.Property(e => e.StartDate)
                 .HasDefaultValue(DateTime.Now);
 
-            builder.HasOne(e => e.Creator)
-                .WithMany(u => u.Events)
-                .HasForeignKey(e => e.Id)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasMany(e => e.Participants)
-                .WithOne(u => u.Event)
-                .HasForeignKey(e => e.EventId)
+            builder
+                .HasOne(e => e.Creator)
+                .WithMany(c => c.CreatedEvents)
+                .HasForeignKey(c => c.CreatorId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

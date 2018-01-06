@@ -12,7 +12,7 @@ namespace Semkovo.Data.Models
         public List<Article> Articles { get; set; } = new List<Article>();
         public List<Comment> Comments { get; set; } = new List<Comment>();
         public List<ArticleVote> UserVotes { get; set; } = new List<ArticleVote>();
-        public List<Event> Events { get; set; } = new List<Event>();
-        public List<UserEvents> UserEvents { get; set; } = new List<UserEvents>();
+        public List<Event> CreatedEvents { get; set; } = new List<Event>();
+        public List<UserEvents> SubscribedEvents { get; set; } = new List<UserEvents>();
     }
 }
