@@ -11,9 +11,10 @@ using System;
 namespace Semkovo.Data.Migrations
 {
     [DbContext(typeof(SemkovoDbContext))]
-    partial class SemkovoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180106171316_TablesEventsAndUserEventsAdded")]
+    partial class TablesEventsAndUserEventsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,7 +140,7 @@ namespace Semkovo.Data.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 1, 6, 19, 14, 46, 994, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 1, 6, 19, 13, 15, 12, DateTimeKind.Local));
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -180,7 +181,7 @@ namespace Semkovo.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 1, 6, 19, 14, 47, 8, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 1, 6, 19, 13, 15, 27, DateTimeKind.Local));
 
                     b.HasKey("Id");
 
@@ -206,7 +207,7 @@ namespace Semkovo.Data.Migrations
 
                     b.Property<DateTime>("StartDate")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 1, 6, 19, 14, 47, 19, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 1, 6, 19, 13, 15, 38, DateTimeKind.Local));
 
                     b.HasKey("Id");
 
@@ -222,7 +223,7 @@ namespace Semkovo.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 1, 6, 19, 14, 47, 18, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 1, 6, 19, 13, 15, 36, DateTimeKind.Local));
 
                     b.Property<string>("ImageUrl");
 

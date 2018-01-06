@@ -17,7 +17,8 @@ namespace Semkovo.Data
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<ArticleVote> ArticleVotes { get; set; }
         public DbSet<Event> Events { get; set; }
-        
+        public DbSet<UserEvents> UserEvents { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserConfig());
@@ -26,6 +27,7 @@ namespace Semkovo.Data
             builder.ApplyConfiguration(new ArticleVoteConfig());
             builder.ApplyConfiguration(new PictureConfig());
             builder.ApplyConfiguration(new EventConfig());
+            builder.ApplyConfiguration(new UserEventsConfig());
 
             base.OnModelCreating(builder);
         }
