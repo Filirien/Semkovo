@@ -7,6 +7,14 @@ namespace Semkovo.Services
 {
     public interface IEventService
     {
+        Task<int> CreateAsync(
+            string name,
+            DateTime StartDate,
+            DateTime EndDate,
+            string creatorId,
+            int limit
+            );
+
         Task<IEnumerable<EventListingServiceModel>> AllAsync(int page = 1);
 
         Task<EventDetailsServiceModel> DetailsAsync(int id);

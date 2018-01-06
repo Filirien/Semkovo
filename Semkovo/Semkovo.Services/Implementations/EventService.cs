@@ -6,6 +6,7 @@ using Semkovo.Data;
 using System.Linq;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Semkovo.Data.Models;
 
 namespace Semkovo.Services.Implementations
 {
@@ -16,6 +17,28 @@ namespace Semkovo.Services.Implementations
         public EventService(SemkovoDbContext db)
         {
             this.db = db;
+        }
+
+        public async Task<int> CreateAsync(string name, DateTime startDate, DateTime endDate, string creatorId, int limit)
+        {
+            var creator = await this.db.Users.FindAsync(creatorId);
+
+            //TODO validate dates
+
+            var ev = new Event
+            {
+                Name = name,
+                StartDate = startDate,
+                EndDate = endDate,
+                Creator = creator,
+                Limit = limit
+            };
+
+            this.db.Add(ev);
+
+            await this.db.SaveChangesAsync();
+
+            return ev.Id;
         }
 
         public async Task<IEnumerable<EventListingServiceModel>> AllAsync(int page = 1)
