@@ -9,6 +9,11 @@ namespace Semkovo.Data.EntityConfig
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(e => e.Id);
+
+            builder.HasMany(u => u.UserEvents)
+                .WithOne(e => e.Participant)
+                .HasForeignKey(e => e.ParticipantId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

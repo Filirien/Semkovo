@@ -16,7 +16,7 @@ namespace Semkovo.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<ArticleVote> ArticleVotes { get; set; }
-
+        public DbSet<Event> Events { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -25,6 +25,7 @@ namespace Semkovo.Data
             builder.ApplyConfiguration(new CommentConfig());
             builder.ApplyConfiguration(new ArticleVoteConfig());
             builder.ApplyConfiguration(new PictureConfig());
+            builder.ApplyConfiguration(new EventConfig());
 
             base.OnModelCreating(builder);
         }
