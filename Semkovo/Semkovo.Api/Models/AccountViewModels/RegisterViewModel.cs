@@ -9,8 +9,8 @@ namespace Semkovo.Web.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
-        public string UserName { get; set; }
+        [Display(Name = "Username")]
+        public string Username { get; set; }
 
         [Required]
         [EmailAddress]
@@ -27,5 +27,8 @@ namespace Semkovo.Web.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
     }
 }

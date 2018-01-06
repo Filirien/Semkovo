@@ -36,13 +36,13 @@ namespace Semkovo.Data.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     Name = table.Column<string>(nullable: false),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUsername = table.Column<string>(maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                    Username = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -287,11 +287,11 @@ namespace Semkovo.Data.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
+                name: "UsernameIndex",
                 table: "AspNetUsers",
-                column: "NormalizedUserName",
+                column: "NormalizedUsername",
                 unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                filter: "[NormalizedUsername] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ArticleId",

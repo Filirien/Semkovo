@@ -233,7 +233,7 @@ namespace Semkovo.Data.Migrations
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
-                    b.Property<string>("NormalizedUserName")
+                    b.Property<string>("NormalizedUsername")
                         .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
@@ -246,7 +246,7 @@ namespace Semkovo.Data.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Username")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -254,10 +254,10 @@ namespace Semkovo.Data.Migrations
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
+                    b.HasIndex("NormalizedUsername")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasName("UsernameIndex")
+                        .HasFilter("[NormalizedUsername] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
