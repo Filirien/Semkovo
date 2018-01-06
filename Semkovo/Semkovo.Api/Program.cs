@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Semkovo.Data;
 
-namespace Semkovo.Api
+namespace Semkovo.Web
 {
     public class Program
     {

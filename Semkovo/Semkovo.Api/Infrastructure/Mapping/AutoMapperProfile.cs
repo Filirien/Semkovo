@@ -3,7 +3,7 @@ using Semkovo.Common.Mapping;
 using System;
 using System.Linq;
 
-namespace Semkovo.Api.Infrastructure.Mapping
+namespace Semkovo.Web.Infrastructure.Mapping
 {
     public class AutoMapperProfile : Profile
     {

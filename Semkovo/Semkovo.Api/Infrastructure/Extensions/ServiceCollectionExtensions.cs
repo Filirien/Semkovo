@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Semkovo.Api.Infrastructure.Extensions
+namespace Semkovo.Web.Infrastructure.Extensions
 {
     public static class ServiceCollectionExtensions
     {

@@ -4,14 +4,15 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Semkovo.Api.Infrastructure.Extensions;
+using Semkovo.Web.Infrastructure.Extensions;
 using AutoMapper;
 using Semkovo.Data;
 using Microsoft.EntityFrameworkCore;
 using Semkovo.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Semkovo.Api
+namespace Semkovo.Web
 {
     public class Startup
     {
@@ -21,8 +22,7 @@ namespace Semkovo.Api
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SemkovoDbContext>(options =>
@@ -48,7 +48,12 @@ namespace Semkovo.Api
 
             services.AddDomainServices();
 
-            services.AddMvc();
+            services.AddRouting(routing => routing.LowercaseUrls = true);
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,10 +64,24 @@ namespace Semkovo.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/home/error");
             }
 
+            app.UseStaticFiles();
+
             app.UseAuthentication();
-            app.UseMvc();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Semkovo.Data;
 
-namespace Semkovo.Api.Infrastructure.Extensions
+namespace Semkovo.Web.Infrastructure.Extensions
 {
     public static class ApplicationBuilderExtensions
     {

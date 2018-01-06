@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Semkovo.Api", "Semkovo.Api\Semkovo.Api.csproj", "{468A9B77-9C9B-4B6F-B65B-69DFB930764C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Semkovo.Web", "Semkovo.Api\Semkovo.Web.csproj", "{468A9B77-9C9B-4B6F-B65B-69DFB930764C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Semkovo.Data", "Semkovo.Data\Semkovo.Data.csproj", "{10039CCB-22E2-4E9A-8D0A-E257BFA1BB9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Semkovo.Data", "Semkovo.Data\Semkovo.Data.csproj", "{10039CCB-22E2-4E9A-8D0A-E257BFA1BB9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Semkovo.Services", "Semkovo.Services\Semkovo.Services.csproj", "{6B4B5910-D318-49CB-83CD-7712D68CD8E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Semkovo.Services", "Semkovo.Services\Semkovo.Services.csproj", "{6B4B5910-D318-49CB-83CD-7712D68CD8E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Semkovo.Common", "Semkovo.Common\Semkovo.Common.csproj", "{691CA464-08B7-420B-98D9-D9B50F5F44D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Semkovo.Common", "Semkovo.Common\Semkovo.Common.csproj", "{691CA464-08B7-420B-98D9-D9B50F5F44D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
