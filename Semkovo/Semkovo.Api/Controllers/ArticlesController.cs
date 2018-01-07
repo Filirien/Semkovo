@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Semkovo.Web.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticlesController : Controller
     {
         private IArticleService articles;
         private UserManager<User> userManager;
 
-        public ArticleController(IArticleService articles, UserManager<User> userManager)
+        public ArticlesController(IArticleService articles, UserManager<User> userManager)
         {
             this.articles = articles;
             this.userManager = userManager;
         }
 
         public async Task<IActionResult> All(int page = 1)
-            => this.View();
+            => this.View(await this.articles.AllAsync(page));
     }
 }

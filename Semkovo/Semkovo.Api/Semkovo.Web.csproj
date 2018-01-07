@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Semkovo.Services\Semkovo.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Articles\" />
+  </ItemGroup>
+
 </Project>

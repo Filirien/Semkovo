@@ -11,9 +11,7 @@ namespace Semkovo.Data.EntityConfig
         public void Configure(EntityTypeBuilder<Article> builder)
         {
             builder.HasKey(e => e.Id);
-            builder.Property(e => e.Title)
-                .IsRequired()
-                .HasMaxLength(50);
+
             builder.Property(e => e.CreatedOn)
                 .HasDefaultValue(DateTime.Now);
 
