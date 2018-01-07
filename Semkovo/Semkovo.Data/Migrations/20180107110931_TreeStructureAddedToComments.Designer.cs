@@ -11,9 +11,10 @@ using System;
 namespace Semkovo.Data.Migrations
 {
     [DbContext(typeof(SemkovoDbContext))]
-    partial class SemkovoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180107110931_TreeStructureAddedToComments")]
+    partial class TreeStructureAddedToComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,7 +140,7 @@ namespace Semkovo.Data.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 1, 7, 13, 12, 29, 695, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 1, 7, 13, 9, 30, 107, DateTimeKind.Local));
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -181,7 +182,7 @@ namespace Semkovo.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 1, 7, 13, 12, 29, 710, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 1, 7, 13, 9, 30, 122, DateTimeKind.Local));
 
                     b.Property<int?>("ParentCommentId");
 
@@ -211,7 +212,7 @@ namespace Semkovo.Data.Migrations
 
                     b.Property<DateTime>("StartDate")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 1, 7, 13, 12, 29, 721, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 1, 7, 13, 9, 30, 131, DateTimeKind.Local));
 
                     b.HasKey("Id");
 
@@ -227,7 +228,7 @@ namespace Semkovo.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2018, 1, 7, 13, 12, 29, 719, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2018, 1, 7, 13, 9, 30, 130, DateTimeKind.Local));
 
                     b.Property<string>("ImageUrl");
 
@@ -380,9 +381,8 @@ namespace Semkovo.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Semkovo.Data.Models.Comment", "ParentComment")
-                        .WithMany("ChildrenComments")
-                        .HasForeignKey("ParentCommentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany()
+                        .HasForeignKey("ParentCommentId");
                 });
 
             modelBuilder.Entity("Semkovo.Data.Models.Event", b =>

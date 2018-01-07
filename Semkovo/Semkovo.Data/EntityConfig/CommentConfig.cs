@@ -18,6 +18,12 @@ namespace Semkovo.Data.EntityConfig
                 .WithMany(u => u.Comments)
                 .HasForeignKey(e => e.AuthorId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(c => c.ParentComment)
+                .WithMany(c => c.ChildrenComments)
+                .HasForeignKey(c => c.ParentCommentId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Semkovo.Data.Models
 {
@@ -13,10 +15,17 @@ namespace Semkovo.Data.Models
 
         public Article Article { get; set; }
 
+        public int? ParentCommentId { get; set; }
+
+        public Comment ParentComment { get; set; }
+        
+        [Required]
         public string AuthorId { get; set; }
 
         public User Author { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public List<Comment> ChildrenComments { get; set; } = new List<Comment>();
     }
 }
