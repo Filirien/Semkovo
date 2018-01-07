@@ -27,6 +27,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Semkovo</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-area="Events" asp-controller="Events" asp-action="Create" class="navbar-brand">Create</a>
+                }
+                <a asp-area="Events" asp-controller="Events" asp-action="All" class="navbar-brand">All</a>
                 <a asp-area="" asp-controller="Home" asp-action="AboutUs" class="navbar-brand">За нас</a>
             </div>
             <div class="navbar-collapse collapse">
