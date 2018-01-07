@@ -12,5 +12,9 @@ namespace Semkovo.Services
         Task CreateArticle(string authorId, string title, string content);
 
         Task<bool> Delete(int id);
+
+        Task Edit(int id, string title, string content);
+
+
     }
 }

@@ -16,11 +16,11 @@ The application provides following functionality to all visitors (without authen
 4. View information about events
 
 Registered users can:
-1. Upload picture
-2. Write articles and comments
-3. Like pictures, articles and comments
-4. Update or delete their articles, comments and pictures
-5. Manage their profile
+1. Write articles and comments
+2. To participate in an event
+2. Like pictures, articles and comments
+3. Update or delete their articles, comments and pictures
+4. Manage their profile
 
 Authenticated administrators can:
 1. Create / edit / delete events
@@ -31,7 +31,7 @@ Authenticated administrators can:
 The information about users, articles, events is stored in a database SemkovoDb.
 
 The database include following tables:
-1. Users - Id, Fullname, Password, Email
+1. Users - Id, Username, Fullname, Password, Email
 2. Articles - Id, Title, Content, AuthorId, CreatedOn
 3. Comments - Id, Content, ArticleId, AuthorId, CreatedOn
 4. Pictures - Id, ImageUrl, CreatedOn
