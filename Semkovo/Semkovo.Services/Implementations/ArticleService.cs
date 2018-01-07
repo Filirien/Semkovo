@@ -65,5 +65,18 @@ namespace Semkovo.Services.Implementations
 
             return true;
         }
+
+        public async Task Edit(int id, string title, string content)
+        {
+            var article = this.db.Articles.Find(id);
+
+            if (article != null)
+            {
+                article.Title = title;
+                article.Content = content;
+
+                await this.db.SaveChangesAsync();
+            }
+        }
     }
 }
