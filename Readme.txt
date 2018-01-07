@@ -1,5 +1,6 @@
 # Semkovo
 Web project for course Teamwork Course
+Our Trello board is https://trello.com/b/xaGerFrr/semkovo
 
 The application provides information about Semkovo resort - Belitsa.
 
