@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Semkovo.Web.Infrastructure.Extensions;
 using Semkovo.Services.Models;
 using Microsoft.AspNetCore.Authorization;
+using Semkovo.Web.Models.UserViewModels;
 
 namespace Semkovo.Web.Areas.Events.Controllers
 {
@@ -60,7 +61,14 @@ namespace Semkovo.Web.Areas.Events.Controllers
 
         public async Task<IActionResult> All()
         {
-            return View(await this.events.AllAsync());
+            // Making is choined logic work
+
+            var events = await this.events.AllAsync();
+
+            return View(new UserViewModel
+            {
+                Events = events
+            });
         }
 
         public async Task<IActionResult> Details(int id)

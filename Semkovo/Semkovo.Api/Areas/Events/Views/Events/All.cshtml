@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EventListingServiceModel>
+﻿@model UserViewModel
 @{
     ViewData["Title"] = "All Events";
 }
@@ -15,10 +15,11 @@
                     <th>Creator</th>
                     <th>Limit</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ev in Model)
+                @foreach (var ev in Model.Events)
                 {
                     <tr>
                         <td>@ev.Name</td>
@@ -26,6 +27,16 @@
                         <td>@ev.EndDate.ToShortDateString()</td>
                         <td>@ev.CreatorName</td>
                         <td>@ev.Limit</td>
+                        <td>
+                            @if (Model.IsJoined)
+                            {
+                                <a asp-area="" asp-controller="Users" asp-action="Join" asp-route-userName="@User.Identity.Name" asp-route-eventId="@ev.Id" class="btn btn-sm btn-success">Join</a>
+                            }
+                            else
+                            {
+                                <a asp-area="" asp-controller="Users" asp-action="SignOut" asp-route-userName="@User.Identity.Name" asp-route-eventId="@ev.Id" class="btn btn-sm btn-danger">Sign out</a>
+                            }
+                        </td>
                         <td><a asp-action="Details" asp-route-id="@ev.Id" class="btn btn-sm btn-primary">Details</a></td>
                     </tr>
                 }
