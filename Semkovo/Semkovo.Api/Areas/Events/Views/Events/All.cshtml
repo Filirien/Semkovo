@@ -1,0 +1,35 @@
+﻿@model IEnumerable<EventListingServiceModel>
+@{
+    ViewData["Title"] = "All Events";
+}
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+<div class="row text-center">
+    <div class="col-md-6">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Creator</th>
+                    <th>Limit</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ev in Model)
+                {
+                    <tr>
+                        <td>@ev.Name</td>
+                        <td>@ev.StartDate.ToShortDateString()</td>
+                        <td>@ev.EndDate.ToShortDateString()</td>
+                        <td>@ev.CreatorName</td>
+                        <td>@ev.Limit</td>
+                        <td><a asp-action="Details" asp-route-id="@ev.Id" class="btn btn-sm btn-primary">Details</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

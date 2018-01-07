@@ -1,9 +1,9 @@
 ﻿@model EventDetailsServiceModel
-
 @{
     ViewData["Title"] = $"Event {Model.Name} details";
-}
 
+    var isCreator = (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatorName) ? "" : "style= display:none";
+}
 <h2 class="text-center">@ViewData["Title"]</h2>
 
 <div class="row margin-top">
@@ -17,6 +17,7 @@
                     <th>End Date</th>
                     <th>Participants</th>
                     <th>Maximum number of participants</th>
+                    <th @isCreator></th>
                 </tr>
             </thead>
             <tbody>
@@ -27,9 +28,12 @@
                     <td>@Model.EndDate.ToShortDateString()</td>
                     <td>@Model.Participants</td>
                     <td>@Model.Limit</td>
+                    <td @isCreator>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-

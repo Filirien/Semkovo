@@ -17,15 +17,18 @@ namespace Semkovo.Services
 
         Task<IEnumerable<EventListingServiceModel>> AllAsync(int page = 1);
 
-        Task<EventDetailsServiceModel> DetailsAsync(int id);
+        Task<EventDetailsServiceModel> DetailsAsync(int eventId);
 
         Task<bool> EditAsync(
-            int id, 
+            string creatorId,
+            int eventId, 
             string name, 
             DateTime startDate,
             DateTime endDate,
             int limit);
 
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(int eventId);
+
+        Task<bool> ExistsAsync(string creatorId, int eventId);
     }
 }

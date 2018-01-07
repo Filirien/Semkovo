@@ -24,7 +24,7 @@ namespace Semkovo.Services.Models
         public void ConfigureMapping(Profile mapper)
             => mapper
                 .CreateMap<Event, EventDetailsServiceModel>()
-                .ForMember(c => c.CreatorName, cfg => cfg.MapFrom(n => n.Creator.FullName))
+                .ForMember(c => c.CreatorName, cfg => cfg.MapFrom(n => n.Creator.UserName))
                 .ForMember(p => p.Participants, cfg => cfg.MapFrom(pc => pc.Participants.Count));
     }
 }
