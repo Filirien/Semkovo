@@ -30,7 +30,14 @@ namespace Semkovo.Services.Implementations
                 .ProjectTo<ArticleListingServiceModel>()
                 .ToListAsync();
 
-        public async Task CreateArticle(string authorId, string title, string content)
+        public async Task<TModel> ByIdAsync<TModel>(int id) where TModel : class
+            => await this.db
+                .Articles
+                .Where(a => a.Id == id)
+                .ProjectTo<TModel>()
+                .FirstOrDefaultAsync();
+
+        public async Task CreateAsync(string authorId, string title, string content)
         {
             Article article = new Article
             {
@@ -44,7 +51,7 @@ namespace Semkovo.Services.Implementations
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var article = this.db.Articles.Find(id);
 
@@ -66,7 +73,7 @@ namespace Semkovo.Services.Implementations
             return true;
         }
 
-        public async Task Edit(int id, string title, string content)
+        public async Task EditAsync(int id, string title, string content)
         {
             var article = this.db.Articles.Find(id);
 
@@ -78,5 +85,11 @@ namespace Semkovo.Services.Implementations
                 await this.db.SaveChangesAsync();
             }
         }
+
+        public string GetAuthorId(int articleId)
+            => this.db
+                .Articles
+                .FirstOrDefault(a => a.Id == articleId)
+                ?.AuthorId;
     }
 }

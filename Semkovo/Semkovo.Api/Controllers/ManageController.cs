@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Semkovo.Web.Models.ManageViewModels;
-using Semkovo.Services;
 using Semkovo.Data.Models;
 
 namespace Semkovo.Web.Controllers

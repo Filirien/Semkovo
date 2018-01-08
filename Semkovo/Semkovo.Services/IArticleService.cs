@@ -9,12 +9,14 @@ namespace Semkovo.Services
     {
         Task<IEnumerable<ArticleListingServiceModel>> AllAsync(int page = 1);
 
-        Task CreateArticle(string authorId, string title, string content);
+        Task CreateAsync(string authorId, string title, string content);
 
-        Task<bool> Delete(int id);
+        Task<bool> DeleteAsync(int id);
 
-        Task Edit(int id, string title, string content);
+        Task EditAsync(int id, string title, string content);
 
+        Task<TModel> ByIdAsync<TModel>(int id) where TModel : class;
 
+        string GetAuthorId(int articleId);
     }
 }
