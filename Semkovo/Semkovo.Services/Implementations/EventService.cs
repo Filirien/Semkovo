@@ -23,7 +23,10 @@ namespace Semkovo.Services.Implementations
         {
             var creator = await this.db.Users.FindAsync(creatorId);
 
-            //TODO validate dates
+            if (startDate < DateTime.UtcNow || startDate > endDate)
+            {
+                return 0;
+            }
 
             var ev = new Event
             {
@@ -48,23 +51,24 @@ namespace Semkovo.Services.Implementations
                 .ProjectTo<EventListingServiceModel>()
                 .ToListAsync();
         
-        public async Task<EventDetailsServiceModel> DetailsAsync(int id)
+        public async Task<EventDetailsServiceModel> DetailsAsync(int eventId)
             => await this.db
                 .Events
-                .Where(e => e.Id == id)
+                .Where(e => e.Id == eventId)
                 .ProjectTo<EventDetailsServiceModel>()
                 .FirstOrDefaultAsync();
 
         public async Task<bool> EditAsync(
-            int id, 
+            string creatorId,
+            int eventId, 
             string name, 
             DateTime startDate, 
             DateTime endDate, 
             int limit)
         {
-            var ev = await this.db.Events.FindAsync(id);
+            var ev = await this.db.Events.FindAsync(eventId);
 
-            if (ev == null)
+            if (ev == null || ev.CreatorId != creatorId)
             {
                 return false;
             }
@@ -79,9 +83,9 @@ namespace Semkovo.Services.Implementations
             return true;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int eventId)
         {
-            var ev = await this.db.Events.FindAsync(id);
+            var ev = await this.db.Events.FindAsync(eventId);
 
             if (ev == null)
             {
@@ -94,5 +98,10 @@ namespace Semkovo.Services.Implementations
 
             return true;
         }
+
+        public async Task<bool> ExistsAsync(string creatorId, int eventId)
+            => await this.db
+                .Events
+                .AnyAsync(e => e.CreatorId == creatorId && e.Id == eventId);
     }
 }

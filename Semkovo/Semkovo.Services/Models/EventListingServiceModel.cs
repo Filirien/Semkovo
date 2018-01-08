@@ -2,6 +2,7 @@
 using Semkovo.Data.Models;
 using System;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace Semkovo.Services.Models
 {
@@ -17,11 +18,15 @@ namespace Semkovo.Services.Models
 
         public string CreatorName { get; set; }
 
+        public List<UserEvents> Participants { get; set; } = new List<UserEvents>();
+
         public int Limit { get; set; }
+
+        public bool IsJoined { get; set; }
 
         public void ConfigureMapping(Profile mapper)
             => mapper
                 .CreateMap<Event, EventListingServiceModel>()
-                .ForMember(c => c.CreatorName, cfg => cfg.MapFrom(n => n.Creator.FullName));
+                .ForMember(c => c.CreatorName, cfg => cfg.MapFrom(n => n.Creator.UserName));
     }
 }

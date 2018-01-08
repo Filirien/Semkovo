@@ -1,9 +1,9 @@
 ﻿@model EventDetailsServiceModel
-
 @{
     ViewData["Title"] = $"Event {Model.Name} details";
-}
 
+    var isCreator = (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatorName) ? "" : "style= display:none";
+}
 <h2 class="text-center">@ViewData["Title"]</h2>
 
 <div class="row margin-top">
@@ -17,6 +17,8 @@
                     <th>End Date</th>
                     <th>Participants</th>
                     <th>Maximum number of participants</th>
+                    <th></th>
+                    <th @isCreator></th>
                 </tr>
             </thead>
             <tbody>
@@ -25,11 +27,24 @@
                     <td>@Model.CreatorName</td>
                     <td>@Model.StartDate.ToShortDateString()</td>
                     <td>@Model.EndDate.ToShortDateString()</td>
-                    <td>@Model.Participants</td>
+                    <td>@Model.ParticipantsCount</td>
                     <td>@Model.Limit</td>
+                    <td>
+                        @if (!Model.IsJoined)
+                        {
+                            <a asp-area="" asp-controller="Users" asp-action="Join" asp-route-userName="@User.Identity.Name" asp-route-eventId="@Model.Id" class="btn btn-sm btn-success">Join</a>
+                        }
+                        else
+                        {
+                            <a asp-area="" asp-controller="Users" asp-action="SignOut" asp-route-userName="@User.Identity.Name" asp-route-eventId="@Model.Id" class="btn btn-sm btn-danger">Sign out</a>
+                        }
+                    </td>
+                    <td @isCreator>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
