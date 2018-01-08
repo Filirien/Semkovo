@@ -28,14 +28,14 @@ namespace Semkovo.Web.Controllers
 
         public async Task<IActionResult> SignOut(string userName, int eventId)
         {
-            var canBeSignedOut = await this.users.JoinAsync(userName, eventId);
+            var canBeSignedOut = await this.users.SignOutAsync(userName, eventId);
 
             if (!canBeSignedOut)
             {
                 return BadRequest();
             }
 
-            return RedirectToAction(nameof(EventsController.All), new { Area = "Events", Controller = "All" });
+            return RedirectToAction(nameof(EventsController.All), new { Area = "Events", Controller = "Events" });
         }
     }
 }

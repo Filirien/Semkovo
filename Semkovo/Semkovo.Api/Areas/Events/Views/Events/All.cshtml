@@ -1,4 +1,4 @@
-﻿@model UserViewModel
+﻿@model IEnumerable<EventListingServiceModel>
 @{
     ViewData["Title"] = "All Events";
 }
@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ev in Model.Events)
+                @foreach (var ev in Model)
                 {
                     <tr>
                         <td>@ev.Name</td>
@@ -28,7 +28,7 @@
                         <td>@ev.CreatorName</td>
                         <td>@ev.Limit</td>
                         <td>
-                            @if (Model.IsJoined)
+                            @if (!ev.IsJoined)
                             {
                                 <a asp-area="" asp-controller="Users" asp-action="Join" asp-route-userName="@User.Identity.Name" asp-route-eventId="@ev.Id" class="btn btn-sm btn-success">Join</a>
                             }

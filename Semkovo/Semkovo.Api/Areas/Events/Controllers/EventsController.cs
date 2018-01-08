@@ -8,6 +8,7 @@ using Semkovo.Web.Infrastructure.Extensions;
 using Semkovo.Services.Models;
 using Microsoft.AspNetCore.Authorization;
 using Semkovo.Web.Models.UserViewModels;
+using System.Linq;
 
 namespace Semkovo.Web.Areas.Events.Controllers
 {
@@ -61,14 +62,16 @@ namespace Semkovo.Web.Areas.Events.Controllers
 
         public async Task<IActionResult> All()
         {
-            // Making is choined logic work
-
             var events = await this.events.AllAsync();
 
-            return View(new UserViewModel
+            var userId = this.userManager.GetUserId(User);
+
+            foreach (var ev in events)
             {
-                Events = events
-            });
+                ev.IsJoined = ev.Participants.Any(p => p.ParticipantId == userId);
+            }
+
+            return View(events);
         }
 
         public async Task<IActionResult> Details(int id)
