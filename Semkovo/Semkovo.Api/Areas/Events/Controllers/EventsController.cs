@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Semkovo.Web.Infrastructure.Extensions;
 using Semkovo.Services.Models;
 using Microsoft.AspNetCore.Authorization;
-using Semkovo.Web.Models.UserViewModels;
 using System.Linq;
 
 namespace Semkovo.Web.Areas.Events.Controllers
@@ -82,6 +81,10 @@ namespace Semkovo.Web.Areas.Events.Controllers
             {
                 return BadRequest();
             }
+
+            var userId = this.userManager.GetUserId(User);
+
+            eventDetails.IsJoined = eventDetails.Participants.Any(p => p.ParticipantId == userId);
 
             return View(eventDetails);
         }

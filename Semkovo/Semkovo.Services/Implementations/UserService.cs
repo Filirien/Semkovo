@@ -38,8 +38,8 @@ namespace Semkovo.Services.Implementations
 
             ev.Participants.Add(new UserEvents
             {
-                EventId = eventId,
-                ParticipantId = user.Id
+                ParticipantId = user.Id,
+                EventId = eventId
             });
 
             await this.db.SaveChangesAsync();
