@@ -32,7 +32,9 @@
                     <td>
                         @if (!Model.IsJoined)
                         {
-                            <a asp-area="" asp-controller="Users" asp-action="Join" asp-route-userName="@User.Identity.Name" asp-route-eventId="@Model.Id" class="btn btn-sm btn-success">Join</a>
+                            var isDisabled = Model.Participants.Count >= Model.Limit ? "disabled" : "";
+
+                            <a href="/Users/Join?userName=@User.Identity.Name&eventId=@Model.Id" class="btn btn-sm btn-success @(isDisabled == "" ? "" : "not-active")" @isDisabled>Join</a>
                         }
                         else
                         {
