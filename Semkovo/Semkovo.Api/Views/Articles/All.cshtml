@@ -5,20 +5,73 @@
 }
 
 <h2>@ViewData["Title"]</h2>
+<div id="articles-container">
+    @foreach (var article in Model)
+    {
+        <article>
+            <a href="/articles/details/@article.Id">
+                <h1>@article.Title</h1>
+            </a>
+            <p>Author: @article.Author</p>
+            <p>@article.Content</p>
+            <p>@article.CreatedOn</p>
+            <p>
+                @article.Comments
+                <i class="fa fa-comment"></i>
+            </p>
+        </article>
+    }
+</div>
 
-@foreach (var article in Model)
-{
-    <article>
-        <a href="/articles/details/@article.Id">
-            <h1>@article.Title</h1>
-        </a>
-        <p>Author: @article.Author</p>
-        <p>@article.Content</p>
-        <p>@article.CreatedOn</p>
-        <p>
-            @article.Comments
-            <i class="fa fa-comment"></i>
-        </p>
-    </article>
-}
+<input id="next-page" type="hidden" value="2" />
+
+<p id="loading">
+    <img src="~/images/loading.gif" class="img-responsive" alt="Loading…" />
+</p>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+</script>
+
+<script>
+    $(document).ready(function() {
+        var win = $(window);
+
+        win.scroll(function() {
+            if ($(document).height() - win.height() == win.scrollTop()) {
+                $('#loading').show();
+
+                $.ajax({
+                    url: '/articles/allasync?page=' + $("#next-page").val(),
+                    dataType: 'json',
+                    success: function (json) {
+                        for (var item of json) {
+                            console.log(item);
+                            $('#articles-container').append(`<article>
+                                                                <a href="/articles/details/${item.id}">
+                                                                    <h1>${item.title}</h1>
+                                                                </a>
+                                                                <p>Author: ${item.author}</p>
+                                                                <p>${item.content}</p>
+                                                                <p>${item.createdOn}</p>
+                                                                <p>
+                                                                    ${item.comments}
+                                                                    <i class="fa fa-comment"></i>
+                                                                </p>
+                                                            </article>`);
+                        }
+
+                        var nextPage = Number($("#next-page").val());
+                        $("#next-page").val(nextPage + 1);
+                        $('#loading').hide();
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 

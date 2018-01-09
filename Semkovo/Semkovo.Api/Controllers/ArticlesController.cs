@@ -32,6 +32,10 @@ namespace Semkovo.Web.Controllers
         public async Task<IActionResult> All(int page = 1)
             => this.View(await this.articles.AllAsync(page));
 
+        [AllowAnonymous]
+        public async Task<IActionResult> AllAsync(int page = 1)
+            => Json(await this.articles.AllAsync(page));
+
         public IActionResult Add()
             => View();
 
