@@ -26,12 +26,17 @@ namespace Semkovo.Services.Implementations
                 .Where(u => u.UserName == userName)
                 .FirstOrDefaultAsync();
 
+            var participantsCount = await this.db
+                .UserEvents
+                .Where(e => e.EventId == eventId)
+                .CountAsync();
+
             if (user == null || ev == null)
             {
                 return false;
             }
 
-            if (ev.Participants.Any(e => e.EventId == eventId && e.Participant.UserName == userName))
+            if (ev.Participants.Any(e => e.EventId == eventId && e.Participant.UserName == userName) || participantsCount >= ev.Limit)
             {
                 return false;
             }
