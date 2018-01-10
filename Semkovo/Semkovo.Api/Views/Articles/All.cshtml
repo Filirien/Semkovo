@@ -4,30 +4,45 @@
     ViewData["Title"] = "Articles";
 }
 
-<h2>@ViewData["Title"]</h2>
-<div id="articles-container">
-    @foreach (var article in Model)
-    {
-        <article>
-            <a href="/articles/details/@article.Id">
-                <h1>@article.Title</h1>
-            </a>
-            <p>Author: @article.Author</p>
-            <p>@article.Content</p>
-            <p>@article.CreatedOn</p>
-            <p>
-                @article.Comments
-                <i class="fa fa-comment"></i>
-            </p>
-        </article>
-    }
+<header class="masthead" style="background-image: url('/images/DSC_0170.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Semkovo</h1>
+                    <span class="subheading">Virgin nature</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h2>@ViewData["Title"]</h2>
+        <div id="articles-container">
+            @foreach (var article in Model)
+            {
+                <article>
+                    <a href="/articles/details/@article.Id">
+                        <h1>@article.Title</h1>
+                    </a>
+                    <p>Author: @article.Author</p>
+                    <p>@article.Content</p>
+                    <p>@article.CreatedOn</p>
+                    <p>
+                        @article.Comments
+                        <i class="fa fa-comment"></i>
+                    </p>
+                </article>
+            }
+        </div>
+    </div>
 </div>
 
 <input id="next-page" type="hidden" value="2" />
-
-<p id="loading">
-    <img src="~/images/loading.gif" class="img-responsive" alt="Loading…" />
-</p>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
         asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
@@ -37,10 +52,10 @@
 </script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var win = $(window);
 
-        win.scroll(function() {
+        win.scroll(function () {
             if ($(document).height() - win.height() == win.scrollTop()) {
                 $('#loading').show();
 
@@ -51,17 +66,17 @@
                         for (var item of json) {
                             console.log(item);
                             $('#articles-container').append(`<article>
-                                                                <a href="/articles/details/${item.id}">
-                                                                    <h1>${item.title}</h1>
-                                                                </a>
-                                                                <p>Author: ${item.author}</p>
-                                                                <p>${item.content}</p>
-                                                                <p>${item.createdOn}</p>
-                                                                <p>
-                                                                    ${item.comments}
-                                                                    <i class="fa fa-comment"></i>
-                                                                </p>
-                                                            </article>`);
+                                                                    <a href="/articles/details/${item.id}">
+                                                                        <h1>${item.title}</h1>
+                                                                    </a>
+                                                                    <p>Author: ${item.author}</p>
+                                                                    <p>${item.content}</p>
+                                                                    <p>${item.createdOn}</p>
+                                                                    <p>
+                                                                        ${item.comments}
+                                                                        <i class="fa fa-comment"></i>
+                                                                    </p>
+                                                                </article>`);
                         }
 
                         var nextPage = Number($("#next-page").val());

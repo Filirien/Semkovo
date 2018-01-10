@@ -4,9 +4,25 @@
 
     var isCreator = (User.Identity.IsAuthenticated && User.Identity.Name == Model.CreatorName) ? "" : "style= display:none";
 }
+
+<header class="masthead" style="background-image: url('/images/DSC01320.JPG')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Semkovo</h1>
+                    <span class="subheading">Virgin nature</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
 <h2 class="text-center">@ViewData["Title"]</h2>
 
 <div class="row margin-top">
+    <div class="col-md-2 col-sm-2"></div>
     <div class="col-md-8 col-sm-8">
         <table class="table table-bordered table-hover">
             <thead>
