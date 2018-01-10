@@ -325,3 +325,34 @@ footer {
 .btn-lg {
   font-size: 16px;
   padding: 25px 35px; }
+
+/*Comments css:*/
+
+.glyphicon {
+    font-size: 25px;
+    opacity: 1;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+
+    .glyphicon:hover {
+        opacity: 0.75;
+        cursor: pointer;
+    }
+
+#meme-votes {
+    font-size: 25px;
+}
+
+.comment-content {
+    text-align: left;
+}
+
+.box-center {
+    text-align: center;
+}
+
+.comment-icon {
+    font-size: 30px;
+}

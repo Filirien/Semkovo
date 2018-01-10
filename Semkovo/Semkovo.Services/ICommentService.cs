@@ -12,5 +12,7 @@ namespace Semkovo.Services
 
         Task Delete(int id);
 
+        Task<int?> GetArticleId(int commentId);
+
     }
 }

@@ -23,6 +23,7 @@ namespace Semkovo.Services.Implementations
                 AuthorId = authorId,
                 Content = content,
                 ArticleId = articleId,
+                ParentCommentId = parentCommentId,
                 CreatedOn = DateTime.Now
             };
 
@@ -47,5 +48,10 @@ namespace Semkovo.Services.Implementations
             }
         }
 
+        public async Task<int?> GetArticleId(int commentId)
+            => await this.db.Comments
+                    .Where(c => (c.Id == commentId || c.ChildrenComments.Any(cc => cc.Id == commentId)) && c.ArticleId != null)
+                    .Select(c => c.ArticleId)
+                    .FirstOrDefaultAsync();
     }
 }

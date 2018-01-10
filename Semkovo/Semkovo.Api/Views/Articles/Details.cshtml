@@ -2,21 +2,78 @@
 @{
     ViewData["Title"] = "Details";
 }
-<h2>@ViewData["Title"]</h2>
-<article>
-    <h1>@Model.Title</h1>
-    <p>Author: @Model.Author</p>
-    <p>@Model.Content</p>
-    <p>@Model.CreatedOn</p>
-    <p>
-        @Model.Comments
-        <i class="fa fa-comment"></i>
-    </p>
-    <p>
-        @if (User.Identity.Name.ToLower() == Model.Author.ToLower() || User.IsInRole(WebConstants.AdministratorRole))
-        {
-            <a href="/articles/edit/@Model.Id" class="btn btn-warning">Edit</a>
-            <a href="/articles/delete/@Model.Id" class="btn btn-danger">Delete</a>
-        }
-    </p>
-</article>
+
+<div class="row">
+    <h2>@ViewData["Title"]</h2>
+    <article>
+        <h1>@Model.Title</h1>
+        <p>Author: @Model.Author</p>
+        <p>@Model.Content</p>
+        <p>@Model.CreatedOn</p>
+        <p>
+            @Model.Comments.Count
+            <i class="fa fa-comment"></i>
+        </p>
+        <p>
+            @if (User.Identity.Name.ToLower() == Model.Author.ToLower() || User.IsInRole(WebConstants.AdministratorRole))
+            {
+                <a href="/articles/edit/@Model.Id" class="btn btn-warning">Edit</a>
+                <a href="/articles/delete/@Model.Id" class="btn btn-danger">Delete</a>
+            }
+        </p>
+    </article>
+</div>
+
+<div class="row">
+    <div class="comments-container">
+        <h1>Comments</h1>
+        <a href="/comments/create?articleId=@Model.Id&parentCommentId=null" class="btn btn-success">Add Comment</a>
+        <ul id="comments-list" class="comments-list">
+            @foreach (var comment in Model.Comments)
+            {
+                <li>
+                    <div class="comment-main-level">
+                        <div class="comment-box">
+                            <div class="comment-head">
+                                <h6 class="comment-name@(Model.Author==comment.Author?" by-author":"")"><a href="/users/profile/@comment.AuthorId">@comment.Author</a></h6>
+                                <span>@comment.CreatedOn</span>
+                                <a href="/comments/create?articleId=null&parentCommentId=@comment.Id"><i class="fa fa-reply"></i></a>
+
+                                @if (User.Identity.Name == Model.Author || User.IsInRole(WebConstants.AdministratorRole))
+                                {
+                                    <a href="/comments/delete/@comment.Id"><i class="fa fa-trash-o"></i></a>
+                                }
+                            </div>
+                            <div class="comment-content">
+                                @comment.Content
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Respuestas de los comentarios -->
+                    <ul class="comments-list reply-list">
+                        @foreach (var subcomment in comment.ChildrenComments)
+                        {
+                            <li>
+                                <div class="comment-box">
+                                    <div class="comment-head">
+                                        <h6 class="comment-name@(Model.Author==subcomment.Author?" by-author":"")"><a href="/users/profile/@subcomment.AuthorId">@subcomment.Author</a></h6>
+                                        <span>@subcomment.CreatedOn</span>
+                                        @if (User.Identity.Name == Model.Author || User.IsInRole(WebConstants.AdministratorRole))
+                                        {
+                                            <a href="/comments/delete/@subcomment.Id"><i class="fa fa-trash-o"></i></a>
+                                        }
+                                    </div>
+                                    <div class="comment-content">
+                                        @subcomment.Content
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+
+            }
+        </ul>
+    </div>
+</div>
