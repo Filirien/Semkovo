@@ -5,10 +5,9 @@ using Semkovo.Services;
 using Semkovo.Web.Infrastructure.Extensions;
 using Semkovo.Web.Infrastructure.Filters;
 using Semkovo.Web.Models.Comments;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+
+using static Semkovo.Web.WebConstants;
 
 namespace Semkovo.Web.Controllers
 {
@@ -55,6 +54,27 @@ namespace Semkovo.Web.Controllers
             TempData.AddSuccessMessage($"Comment created successfully!");
 
             return RedirectToAction("Details", "Articles", new { id = model.ArticleId });
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = this.userManager.GetUserId(User);
+            var memeAuthorId = await this.comments.GetAuthorId(id);
+            if (memeAuthorId != userId && !User.IsInRole(AdministratorRole))
+            {
+                return BadRequest();
+            }
+
+            var memeId = await this.comments.GetArticleId(id);
+
+            if (memeId == null)
+            {
+                return BadRequest();
+            }
+
+            await this.comments.Delete(id);
+
+            return RedirectToAction("Details", "Articles", new { id = memeId });
         }
     }
 }

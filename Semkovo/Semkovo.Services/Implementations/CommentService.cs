@@ -53,5 +53,11 @@ namespace Semkovo.Services.Implementations
                     .Where(c => (c.Id == commentId || c.ChildrenComments.Any(cc => cc.Id == commentId)) && c.ArticleId != null)
                     .Select(c => c.ArticleId)
                     .FirstOrDefaultAsync();
+
+        public async Task<string> GetAuthorId(int id)
+            => await this.db
+            .Comments.Where(m => m.Id == id)
+            .Select(m => m.AuthorId)
+            .FirstOrDefaultAsync();
     }
 }

@@ -14,5 +14,6 @@ namespace Semkovo.Services
 
         Task<int?> GetArticleId(int commentId);
 
+        Task<string> GetAuthorId(int id);
     }
 }

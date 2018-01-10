@@ -35,11 +35,11 @@
                     <div class="comment-main-level">
                         <div class="comment-box">
                             <div class="comment-head">
-                                <h6 class="comment-name@(Model.Author==comment.Author?" by-author":"")"><a href="/users/profile/@comment.AuthorId">@comment.Author</a></h6>
+                                <h6 class="comment-name@(Model.Author.ToLower() == comment.Author.ToLower()?" by-author":"")"><a href="/users/profile/@comment.AuthorId">@comment.Author</a></h6>
                                 <span>@comment.CreatedOn</span>
                                 <a href="/comments/create?articleId=null&parentCommentId=@comment.Id"><i class="fa fa-reply"></i></a>
 
-                                @if (User.Identity.Name == Model.Author || User.IsInRole(WebConstants.AdministratorRole))
+                                @if (User.Identity.Name.ToLower() == comment.Author.ToLower() || User.IsInRole(WebConstants.AdministratorRole))
                                 {
                                     <a href="/comments/delete/@comment.Id"><i class="fa fa-trash-o"></i></a>
                                 }
@@ -56,9 +56,9 @@
                             <li>
                                 <div class="comment-box">
                                     <div class="comment-head">
-                                        <h6 class="comment-name@(Model.Author==subcomment.Author?" by-author":"")"><a href="/users/profile/@subcomment.AuthorId">@subcomment.Author</a></h6>
+                                        <h6 class="comment-name@(Model.Author.ToLower() == subcomment.Author.ToLower()?" by-author":"")"><a href="/users/profile/@subcomment.AuthorId">@subcomment.Author</a></h6>
                                         <span>@subcomment.CreatedOn</span>
-                                        @if (User.Identity.Name == Model.Author || User.IsInRole(WebConstants.AdministratorRole))
+                                        @if (User.Identity.Name.ToLower() == subcomment.Author.ToLower() || User.IsInRole(WebConstants.AdministratorRole))
                                         {
                                             <a href="/comments/delete/@subcomment.Id"><i class="fa fa-trash-o"></i></a>
                                         }
