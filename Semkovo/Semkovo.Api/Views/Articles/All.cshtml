@@ -22,23 +22,30 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <h2>@ViewData["Title"]</h2>
-        <div id="articles-container">
-            @foreach (var article in Model)
-            {
-                <article>
-                    <a href="/articles/details/@article.Id">
-                        <h1>@article.Title</h1>
-                    </a>
-                    <p>Author: @article.Author</p>
-                    <p>@article.Content</p>
-                    <p>@article.CreatedOn</p>
-                    <p>
-                        @article.Comments
-                        <i class="fa fa-comment"></i>
-                    </p>
-                </article>
-            }
-        </div>
+        @if (Model.Any())
+        {
+            <div id="articles-container">
+                @foreach (var article in Model)
+                {
+                    <article>
+                        <a href="/articles/details/@article.Id">
+                            <h1>@article.Title</h1>
+                        </a>
+                        <p>Author: @article.Author</p>
+                        <p>@article.Content</p>
+                        <p>@article.CreatedOn</p>
+                        <p>
+                            @article.Comments
+                            <i class="fa fa-comment"></i>
+                        </p>
+                    </article>
+                }
+            </div>
+        }
+        else
+        {
+            <div>No articles yet</div>
+        }
     </div>
 </div>
 
