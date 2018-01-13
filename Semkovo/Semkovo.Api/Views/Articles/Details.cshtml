@@ -2,29 +2,44 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<header class="masthead" style="background-image: url('/images/DSC01320.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Semkovo</h1>
+                    <span class="subheading">Virgin nature</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 <div class="row">
-    <h2>@ViewData["Title"]</h2>
-    <article>
-        <h1>@Model.Title</h1>
-        <p>Author: @Model.Author</p>
-        <p>@Model.Content</p>
-        <p>@Model.CreatedOn</p>
-        <p>
-            @Model.Comments.Count
-            <i class="fa fa-comment"></i>
-        </p>
-        <p>
-            @if (User.Identity.Name.ToLower() == Model.Author.ToLower() || User.IsInRole(WebConstants.AdministratorRole))
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h2>@ViewData["Title"]</h2>
+        <article>
+            <h1>@Model.Title</h1>
+            <p>Author: @Model.Author</p>
+            <p>@Model.Content</p>
+            <p>@Model.CreatedOn</p>
+            <p>
+                @Model.Comments.Count
+                <i class="fa fa-comment"></i>
+            </p>
+            <p>
+                @if (User.Identity.Name.ToLower() == Model.Author.ToLower() || User.IsInRole(WebConstants.AdministratorRole))
             {
-                <a href="/articles/edit/@Model.Id" class="btn btn-warning">Edit</a>
-                <a href="/articles/delete/@Model.Id" class="btn btn-danger">Delete</a>
-            }
-        </p>
-    </article>
+                    <a href="/articles/edit/@Model.Id" class="btn btn-warning">Edit</a>
+                    <a href="/articles/delete/@Model.Id" class="btn btn-danger">Delete</a>
+                }
+            </p>
+        </article>
+    </div>
 </div>
 
 <div class="row">
+    <div class="col-md-2"></div>
     <div class="comments-container">
         <h1>Comments</h1>
         <a href="/comments/create?articleId=@Model.Id&parentCommentId=null" class="btn btn-success">Add Comment</a>
