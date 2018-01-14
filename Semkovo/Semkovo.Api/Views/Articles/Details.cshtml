@@ -34,6 +34,13 @@
                     <a href="/articles/delete/@Model.Id" class="btn btn-danger">Delete</a>
                 }
             </p>
+            <hr />
+            <div>
+                <i id="article-upvote" class="glyphicon glyphicon-chevron-up"></i>
+                <span id="article-votes" class="label label-primary">@Model.Votes</span>
+                <i id="article-downvote" class="glyphicon glyphicon-chevron-down"></i>
+            </div>
+            <hr />
         </article>
     </div>
 </div>
@@ -92,3 +99,36 @@
         </ul>
     </div>
 </div>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#article-upvote").click(function (event) {
+            $.post("/articles/AddOrUpdateVote",
+            {
+                ArticleId: @Model.Id,
+                Value: 1
+            },
+            function (data, status) {
+                $("#article-votes").text(data);
+            });
+        });
+
+        $("#article-downvote").click(function (event) {
+            $.post("/articles/AddOrUpdateVote",
+            {
+                ArticleId: @Model.Id,
+                Value: -1
+            },
+            function (data, status) {
+                $("#article-votes").text(data);
+            });
+        });
+    });
+</script>

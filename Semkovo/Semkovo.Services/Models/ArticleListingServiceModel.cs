@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 
 using static Semkovo.Data.DataConstants;
+using System.Linq;
 
 namespace Semkovo.Services.Models
 {
@@ -22,10 +23,13 @@ namespace Semkovo.Services.Models
         
         public int Comments { get; set; }
 
+        public int Votes { get; set; }
+
         public void ConfigureMapping(Profile mapper)
              => mapper
                     .CreateMap<Article, ArticleListingServiceModel>()
                     .ForMember(mm => mm.Comments, cfg => cfg.MapFrom(m => m.Comments.Count))
-                    .ForMember(mm => mm.Author, cfg => cfg.MapFrom(m => m.Author.UserName));
+                    .ForMember(mm => mm.Author, cfg => cfg.MapFrom(m => m.Author.UserName))
+                    .ForMember(mm => mm.Votes, cfg => cfg.MapFrom(m => m.ArticleVotes.Sum(v => v.Count)));
     }
 }

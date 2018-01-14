@@ -67,6 +67,9 @@ namespace Semkovo.Services.Implementations
                 comment.ArticleId = null;
             }
 
+            var votes = this.db.ArticleVotes.Where(av => av.ArticleId == article.Id);
+
+            this.db.RemoveRange(votes);
             this.db.Remove(article);
             await this.db.SaveChangesAsync();
 
@@ -91,5 +94,65 @@ namespace Semkovo.Services.Implementations
                 .Articles
                 .FirstOrDefault(a => a.Id == articleId)
                 ?.AuthorId;
+
+        public async Task<int> AddOrUpdateVote(int memeId, string userId, int value)
+        {
+            if (!await this.DoesArticleExistAsync(memeId))
+            {
+                return -1;
+            }
+            var vote = this.db.ArticleVotes
+                .Where(m => m.ArticleId == memeId && m.UserId == userId)
+                .FirstOrDefault();
+
+            value = this.NormalizeValue(value);
+
+            if (vote == null)
+            {
+                vote = new ArticleVote
+                {
+                    Count = value,
+                    ArticleId = memeId,
+                    UserId = userId
+                };
+
+                this.db.Add(vote);
+            }
+            else
+            {
+                var difference = vote.Count + value;
+                vote.Count = this.NormalizeValue(difference); ;
+            }
+
+            await this.db.SaveChangesAsync();
+
+            return await this.Votes(memeId);
+        }
+
+        public async Task<int> Votes(int memeId)
+        {
+            if (!await this.DoesArticleExistAsync(memeId))
+            {
+                return -1;
+            }
+
+            return this.db.ArticleVotes.Where(v => v.ArticleId == memeId).Select(v => v.Count).DefaultIfEmpty(0).Sum();
+        }
+
+        private int NormalizeValue(int value)
+        {
+            if (value > 1)
+            {
+                value = 1;
+            }
+            if (value < -1)
+            {
+                value = -1;
+            }
+            return value;
+        }
+
+        public async Task<bool> DoesArticleExistAsync(int id)
+           => await this.db.Articles.AnyAsync(m => m.Id == id);
     }
 }

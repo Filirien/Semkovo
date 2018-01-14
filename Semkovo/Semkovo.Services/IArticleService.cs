@@ -18,5 +18,9 @@ namespace Semkovo.Services
         Task<TModel> ByIdAsync<TModel>(int id) where TModel : class;
 
         string GetAuthorId(int articleId);
+
+        Task<int> AddOrUpdateVote(int memeId, string userId, int value);
+
+        Task<int> Votes(int memeId);
     }
 }

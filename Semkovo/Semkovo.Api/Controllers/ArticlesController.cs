@@ -96,5 +96,14 @@ namespace Semkovo.Web.Controllers
 
             return this.RedirectToAction(nameof(All));
         }
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> AddOrUpdateVote(ArticleVoteViewModel model)
+        {
+            var userId = this.userManager.GetUserId(User);
+
+            return this.Ok(await this.articles.AddOrUpdateVote(model.ArticleId, userId, model.Value));
+        }
     }
 }

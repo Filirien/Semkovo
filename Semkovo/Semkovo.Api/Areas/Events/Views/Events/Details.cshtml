@@ -46,16 +46,19 @@
                     <td>@Model.ParticipantsCount</td>
                     <td>@Model.Limit</td>
                     <td>
-                        @if (!Model.IsJoined)
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            var isDisabled = Model.Participants.Count >= Model.Limit ? "disabled" : "";
+                            @if (!Model.IsJoined)
+                            {
+                                var isDisabled = Model.Participants.Count >= Model.Limit ? "disabled" : "";
 
-                            <a href="/Users/Join?userName=@User.Identity.Name&eventId=@Model.Id" class="btn btn-sm btn-success @(isDisabled == "" ? "" : "not-active")" @isDisabled>Join</a>
-                        }
-                        else
-                        {
-                            <a asp-area="" asp-controller="Users" asp-action="SignOut" asp-route-userName="@User.Identity.Name" asp-route-eventId="@Model.Id" class="btn btn-sm btn-danger">Sign out</a>
-                        }
+                                <a href="/Users/Join?userName=@User.Identity.Name&eventId=@Model.Id" class="btn btn-sm btn-success @(isDisabled == "" ? "" : "not-active")" @isDisabled>Join</a>
+                            }
+                            else
+                            {
+                                <a asp-area="" asp-controller="Users" asp-action="SignOut" asp-route-userName="@User.Identity.Name" asp-route-eventId="@Model.Id" class="btn btn-sm btn-danger">Sign out</a>
+                            }
+                        }                        
                     </td>
                     <td @isCreator>
                         <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-primary">Edit</a>

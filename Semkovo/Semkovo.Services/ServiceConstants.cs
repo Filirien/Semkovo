@@ -4,6 +4,6 @@ namespace Semkovo.Services
 {
     public class ServiceConstants
     {
-        public const int MemesPageSize = 8;
+        public const int MemesPageSize = 2;
     }
 }
